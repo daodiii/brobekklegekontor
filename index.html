@@ -472,6 +472,44 @@
 
         .section--alt {
             background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism background blobs for services section */
+        #tjenester {
+            background: linear-gradient(135deg, rgba(12,35,64,0.03), rgba(27,94,59,0.03));
+        }
+
+        #tjenester::before,
+        #tjenester::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #tjenester::before {
+            width: 400px;
+            height: 400px;
+            background: rgba(12, 35, 64, 0.06);
+            top: -100px;
+            left: -100px;
+        }
+
+        #tjenester::after {
+            width: 350px;
+            height: 350px;
+            background: rgba(198, 125, 74, 0.06);
+            bottom: -80px;
+            right: -80px;
+        }
+
+        #tjenester > .container {
+            position: relative;
+            z-index: 1;
         }
 
         .section-header {
