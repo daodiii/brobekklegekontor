@@ -1132,6 +1132,12 @@
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .service-card--featured {
+                grid-column: span 2;
+            }
+            .service-card--wide {
+                grid-column: span 2;
+            }
             .contact-grid {
                 grid-template-columns: 1fr;
             }
@@ -1207,6 +1213,17 @@
 
             .services-grid {
                 grid-template-columns: 1fr;
+            }
+            .service-card--featured,
+            .service-card--wide {
+                grid-column: span 1;
+            }
+            .service-card--wide {
+                flex-direction: column;
+                text-align: center;
+            }
+            .service-card--wide .service-icon {
+                margin-bottom: 20px;
             }
 
             .section {
