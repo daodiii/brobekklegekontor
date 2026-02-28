@@ -657,17 +657,22 @@
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            grid-auto-rows: auto;
+            gap: 20px;
         }
 
         .service-card {
             padding: 36px 28px;
-            background: var(--cream);
-            border-radius: var(--radius);
-            border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(12, 35, 64, 0.06);
             transition: all var(--transition);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .service-card::after {
@@ -683,25 +688,54 @@
         }
 
         .service-card:hover {
-            background: var(--white);
-            border-color: var(--border);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 40px rgba(12, 35, 64, 0.1);
+            transform: translateY(-3px);
         }
 
         .service-card:hover::after {
             transform: scaleX(1);
         }
 
+        /* Bento card variants */
+        .service-card--featured {
+            grid-column: span 2;
+            padding: 44px 36px;
+        }
+
+        .service-card--wide {
+            grid-column: span 3;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            padding: 36px 40px;
+        }
+
+        .service-card--wide .service-content {
+            flex: 1;
+        }
+
         .service-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
             margin-bottom: 20px;
             color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .service-card--featured .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+        }
+
+        .service-card--wide .service-icon {
+            margin-bottom: 0;
         }
 
         .service-icon--green { background: var(--forest); }
@@ -709,8 +743,13 @@
         .service-icon--copper { background: var(--copper); }
 
         .service-icon svg {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
+        }
+
+        .service-card--featured .service-icon svg {
+            width: 26px;
+            height: 26px;
         }
 
         .service-card h3 {
@@ -719,6 +758,10 @@
             font-weight: 600;
             color: var(--navy);
             margin-bottom: 8px;
+        }
+
+        .service-card--featured h3 {
+            font-size: 1.5rem;
         }
 
         .service-card p {
