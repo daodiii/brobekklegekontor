@@ -1116,6 +1116,19 @@
             }
             .reveal { opacity: 1; transform: none; }
             .hero-content > * { opacity: 1; transform: none; }
+            .service-card {
+                transition: none;
+            }
+            .service-card::after {
+                transition: none;
+            }
+            .service-card:hover {
+                transform: none;
+            }
+            #tjenester::before,
+            #tjenester::after {
+                display: none;
+            }
         }
 
         /* Focus styles */
