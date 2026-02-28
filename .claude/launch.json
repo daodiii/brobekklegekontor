@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "brobekk-site",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["/Users/daodilyas/Desktop/brobekklege/serve.js"],
+      "port": 8081
+    }
+  ]
+}
