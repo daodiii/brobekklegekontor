@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasjon — Brobekk Legekontor</title>
+    <meta name="description" content="Nyttig pasientinformasjon — vaksiner, konsultasjonstyper, nyttige lenker og blodprøveresultater.">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           DESIGN TOKENS
+           ======================================== */
+        :root {
+            --navy: #0C2340;
+            --navy-mid: #163a5f;
+            --forest: #1B5E3B;
+            --forest-light: #247a4e;
+            --copper: #C67D4A;
+            --copper-light: #D4956A;
+            --copper-dark: #A86835;
+            --copper-glow: rgba(198, 125, 74, 0.15);
+            --cream: #FAF8F5;
+            --white: #FFFFFF;
+            --text: #1C1C1C;
+            --text-secondary: #4A5568;
+            --text-light: #8A939D;
+            --border: #E8E2DA;
+            --shadow-sm: 0 1px 4px rgba(12, 35, 64, 0.05);
+            --shadow-md: 0 4px 20px rgba(12, 35, 64, 0.07);
+            --shadow-lg: 0 12px 40px rgba(12, 35, 64, 0.1);
+            --shadow-hover: 0 8px 30px rgba(12, 35, 64, 0.12);
+            --font-heading: 'Cormorant Garamond', 'Georgia', serif;
+            --font-body: 'Outfit', system-ui, sans-serif;
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --navy-deep: #081B30;
+            --copper-glow-strong: rgba(198, 125, 74, 0.3);
+            --glass: rgba(255, 255, 255, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ========================================
+           BASE STYLES
+           ======================================== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            background: var(--cream);
+            line-height: 1.7;
+            font-weight: 400;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        /* ========================================
+           SKIP LINK
+           ======================================== */
+        .skip-link {
+            position: absolute; top: -100%; left: 16px;
+            background: var(--navy); color: var(--white);
+            padding: 8px 16px; border-radius: var(--radius-sm);
+            z-index: 9999; font-size: 14px;
+        }
+        .skip-link:focus { top: 16px; }
+
+        /* ========================================
+           CONTAINER
+           ======================================== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        @media (min-width: 768px) { .container { padding: 0 40px; } }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0;
+            transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+        }
+        .nav--scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 var(--border), 0 0 0 0.5px rgba(198, 125, 74, 0.08);
+        }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+        .nav-logo {
+            display: flex; align-items: center; gap: 12px;
+            font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600;
+            transition: color var(--transition);
+        }
+        .nav--scrolled .nav-logo { color: var(--navy); }
+        .nav-logo-mark { width: 44px; height: 44px; border-radius: 0; object-fit: contain; transition: transform var(--transition); }
+        .nav-logo:hover .nav-logo-mark { transform: scale(1.05); }
+        .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+        .nav-link {
+            padding: 8px 18px; border-radius: 6px; font-size: 0.9rem; font-weight: 500;
+            letter-spacing: 0.01em; transition: color var(--transition), background var(--transition);
+        }
+        .nav--scrolled .nav-link { color: var(--text-secondary); }
+        .nav--scrolled .nav-link:hover, .nav--scrolled .nav-link.active { color: var(--navy); background: rgba(12, 35, 64, 0.05); }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav-phone {
+            display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500;
+            transition: color var(--transition);
+        }
+        .nav--scrolled .nav-phone { color: var(--navy); }
+        .nav-phone svg { width: 16px; height: 16px; }
+        .nav-phone:hover { color: var(--copper); }
+        .nav-toggle {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 4px;
+        }
+        .nav-toggle span { display: block; width: 22px; height: 2px; border-radius: 2px; transition: transform var(--transition), opacity var(--transition); }
+        .nav--scrolled .nav-toggle span { background: var(--navy); }
+        .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .nav-toggle.active span:nth-child(2) { opacity: 0; }
+        .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ========================================
+           PAGE HEADER
+           ======================================== */
+        .page-header {
+            background: linear-gradient(145deg, var(--navy) 0%, var(--navy-deep) 100%);
+            padding: 160px 0 80px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(198, 125, 74, 0.06);
+            pointer-events: none;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(198, 125, 74, 0.04);
+            pointer-events: none;
+        }
+        .page-header h1 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+        .page-header p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           INFO SECTIONS
+           ======================================== */
+        .info-section {
+            padding: 72px 0;
+        }
+        .info-section + .info-section {
+            border-top: 1px solid var(--border);
+        }
+        .info-section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+        .info-section-header .section-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 10px;
+            background: var(--copper-glow);
+            color: var(--copper-dark);
+        }
+        .info-section-header .section-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+        .info-section-header h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: -0.01em;
+        }
+
+        /* ========================================
+           LINK CARDS
+           ======================================== */
+        .link-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 18px 22px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+        }
+        .link-card:hover {
+            border-color: var(--copper-light);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+        .link-card-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .link-card-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--navy);
+        }
+        .link-card-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        .external-icon {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            color: var(--text-light);
+            transition: color var(--transition);
+        }
+        .link-card:hover .external-icon {
+            color: var(--copper);
+        }
+
+        /* ========================================
+           CONSULT GRID
+           ======================================== */
+        .consult-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .consult-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+        .consult-card:hover {
+            border-color: rgba(198, 125, 74, 0.25);
+            box-shadow: var(--shadow-md);
+        }
+        .consult-card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+        .consult-card-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+        .consult-card-icon--navy {
+            background: rgba(12, 35, 64, 0.06);
+            color: var(--navy);
+        }
+        .consult-card-icon--forest {
+            background: rgba(27, 94, 59, 0.08);
+            color: var(--forest);
+        }
+        .consult-card-icon--copper {
+            background: var(--copper-glow);
+            color: var(--copper-dark);
+        }
+        .consult-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        .consult-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           BLOOD TEST CARD
+           ======================================== */
+        .blood-test-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+        }
+        .blood-test-card p {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 560px;
+        }
+        .btn-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: var(--navy);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+            white-space: nowrap;
+        }
+        .btn-info:hover {
+            background: var(--navy-mid);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+        .btn-info svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ========================================
+           SUBGROUP LABEL
+           ======================================== */
+        .subgroup-label {
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-light);
+            margin-top: 28px;
+            margin-bottom: 14px;
+            padding-left: 2px;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer { background: var(--navy); color: var(--white); padding: 72px 0 0; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+        .footer-brand-name { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .footer-brand-mark { width: 40px; height: 40px; border-radius: 0; object-fit: contain; }
+        .footer-brand p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.55); line-height: 1.7; max-width: 320px; }
+        .footer-col h4 { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; margin-bottom: 20px; color: rgba(255, 255, 255, 0.9); }
+        .footer-col a { display: block; font-size: 0.88rem; color: rgba(255, 255, 255, 0.5); padding: 5px 0; transition: color var(--transition); }
+        .footer-col a:hover { color: var(--copper-light); }
+        .footer-col p { font-size: 0.88rem; color: rgba(255, 255, 255, 0.5); line-height: 1.7; }
+        .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding: 24px 0; font-size: 0.82rem; color: rgba(255, 255, 255, 0.35); }
+        .footer-helsenorge { display: inline-flex; align-items: center; gap: 6px; color: rgba(255, 255, 255, 0.45); transition: color var(--transition); }
+        .footer-helsenorge:hover { color: var(--copper-light); }
+
+        /* ========================================
+           FOCUS STYLES
+           ======================================== */
+        :focus-visible {
+            outline: 2px solid var(--copper);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* ========================================
+           REDUCED MOTION
+           ======================================== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                transition-duration: 0.001ms !important;
+            }
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 16px 24px;
+                gap: 0;
+                box-shadow: var(--shadow-md);
+                display: none;
+                border-top: 1px solid var(--border);
+            }
+            .nav-links.active { display: flex; }
+            .nav-links .nav-link {
+                color: var(--text) !important;
+                padding: 12px 16px;
+                border-radius: 8px;
+                width: 100%;
+            }
+            .nav-links .nav-link:hover,
+            .nav-links .nav-link.active {
+                background: rgba(12, 35, 64, 0.05) !important;
+                color: var(--navy) !important;
+            }
+            .nav-toggle { display: flex; }
+            .nav-phone span { display: none; }
+            .page-header { padding: 120px 0 60px; }
+            .page-header h1 { font-size: 2.2rem; }
+            .info-section { padding: 48px 0; }
+            .info-section-header h2 { font-size: 1.5rem; }
+            .consult-grid { grid-template-columns: 1fr; }
+            .blood-test-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content -->
+    <a href="#main" class="skip-link">Hopp til innhold</a>
+
+    <!-- ======== NAVIGATION ======== -->
+    <nav class="nav nav--scrolled" id="nav" aria-label="Hovednavigasjon">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="index.html" class="nav-logo">
+                    <img src="logo.png" alt="Brobekk Legekontor logo" class="nav-logo-mark">
+                    <span>Brobekk Legekontor</span>
+                </a>
+
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html#hjem" class="nav-link">Hjem</a>
+                    <a href="index.html#helsenorge" class="nav-link">Helsenorge</a>
+                    <a href="index.html#tjenester" class="nav-link">Tjenester</a>
+                    <a href="index.html#kontakt" class="nav-link">Kontakt</a>
+                    <a href="informasjon.html" class="nav-link active">Informasjon</a>
+                </div>
+
+                <div class="nav-right">
+                    <a href="tel:22123456" class="nav-phone" aria-label="Ring oss: 22 12 34 56">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                        <span>22 12 34 56</span>
+                    </a>
+                    <button class="nav-toggle" id="navToggle" aria-label="Meny" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ======== PAGE HEADER ======== -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Informasjon</h1>
+            <p>Nyttig informasjon for deg som pasient — vaksiner, konsultasjoner, lenker og mer.</p>
+        </div>
+    </header>
+
+    <!-- ======== MAIN ======== -->
+    <main id="main">
+
+        <!-- ======== SECTION: VAKSINER ======== -->
+        <section class="info-section">
+            <div class="container">
+                <div class="info-section-header">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h2>Vaksiner</h2>
+                </div>
+                <div class="link-cards-grid">
+                    <a href="https://www.fhi.no/va/influensavaksine/" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Influensavaksine</span>
+                            <span class="link-card-subtitle">fhi.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://helsenorge.no/vaksiner/mine-vaksiner" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Mine vaksiner</span>
+                            <span class="link-card-subtitle">helsenorge.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.fhi.no/sv/vaksine/reisevaksiner/" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Reisevaksiner</span>
+                            <span class="link-card-subtitle">fhi.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.helsenorge.no/vaksinasjon/vaksine-mot-smittsom-hjernehinnebetennelse/" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Meningokokkvaksine</span>
+                            <span class="link-card-subtitle">helsenorge.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SECTION: TYPER KONSULTASJON ======== -->
+        <section class="info-section">
+            <div class="container">
+                <div class="info-section-header">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <path d="M16 2v4M8 2v4M3 10h18"/>
+                        </svg>
+                    </div>
+                    <h2>Typer konsultasjon</h2>
+                </div>
+                <div class="consult-grid">
+                    <div class="consult-card">
+                        <div class="consult-card-icon consult-card-icon--navy">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                <path d="M9 22V12h6v10"/>
+                            </svg>
+                        </div>
+                        <h3>Fysisk oppmøte</h3>
+                        <p>Tradisjonell konsultasjon ved legekontoret. Egner seg for undersøkelser, prøvetaking og prosedyrer som krever fysisk tilstedeværelse.</p>
+                    </div>
+                    <div class="consult-card">
+                        <div class="consult-card-icon consult-card-icon--forest">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <path d="M8 21h8M12 17v4"/>
+                            </svg>
+                        </div>
+                        <h3>E-konsultasjon</h3>
+                        <p>Skriftlig konsultasjon via Helsenorge. Send melding til legen og få svar innen kort tid. Praktisk for oppfølging og enklere henvendelser.</p>
+                    </div>
+                    <div class="consult-card">
+                        <div class="consult-card-icon consult-card-icon--copper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                            </svg>
+                        </div>
+                        <h3>Video- og telefon&shy;konsultasjon</h3>
+                        <p>Snakk med legen via video eller telefon. Egner seg godt for oppfølgingssamtaler, reseptfornyelser og rådgivning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SECTION: NYTTIGE LENKER ======== -->
+        <section class="info-section">
+            <div class="container">
+                <div class="info-section-header">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+                        </svg>
+                    </div>
+                    <h2>Nyttige lenker</h2>
+                </div>
+                <div class="link-cards-grid">
+                    <a href="https://helsenorge.no/behandlere/bytte-av-fastlege" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Bytte fastlege</span>
+                            <span class="link-card-subtitle">helsenorge.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.helsenorge.no/pasientreiser" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Pasientreiser</span>
+                            <span class="link-card-subtitle">helsenorge.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.nav.no/" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">NAV</span>
+                            <span class="link-card-subtitle">nav.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.helfo.no/" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Helfo</span>
+                            <span class="link-card-subtitle">helfo.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.helsedirektoratet.no/" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Helsedirektoratet</span>
+                            <span class="link-card-subtitle">helsedirektoratet.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.fhi.no/" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">FHI</span>
+                            <span class="link-card-subtitle">fhi.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+
+                <p class="subgroup-label">Pasientorganisasjoner</p>
+                <div class="link-cards-grid">
+                    <a href="https://www.diabetes.no" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Diabetesforbundet</span>
+                            <span class="link-card-subtitle">diabetes.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.naaf.no" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">NAAF</span>
+                            <span class="link-card-subtitle">naaf.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.lhl.no" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">LHL</span>
+                            <span class="link-card-subtitle">lhl.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a href="https://www.helsebiblioteket.no/" target="_blank" rel="noopener noreferrer" class="link-card">
+                        <div class="link-card-text">
+                            <span class="link-card-title">Helsebiblioteket</span>
+                            <span class="link-card-subtitle">helsebiblioteket.no</span>
+                        </div>
+                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SECTION: DINE BLODPROVER ======== -->
+        <section class="info-section">
+            <div class="container">
+                <div class="info-section-header">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
+                            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                        </svg>
+                    </div>
+                    <h2>Dine blodprøver</h2>
+                </div>
+                <div class="blood-test-card">
+                    <p>Blodprøvene dine analyseres av Fürst Medisinsk Laboratorium. Du kan se resultatene dine og tidligere prøvesvar ved å logge inn på Fürst sin pasientportal.</p>
+                    <a href="https://www.furstpasient.no/" target="_blank" rel="noopener noreferrer" class="btn-info">
+                        Se dine prøvesvar
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======== FOOTER ======== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-brand-name">
+                        <img src="logo.png" alt="Brobekk Legekontor logo" class="footer-brand-mark">
+                        Brobekk Legekontor
+                    </div>
+                    <p>Din fastlege i Oslo. Vi tilbyr helsetjenester av høyeste kvalitet i trygge og moderne omgivelser.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Hurtiglenker</h4>
+                    <a href="index.html#hjem">Hjem</a>
+                    <a href="index.html#helsenorge">Helsenorge</a>
+                    <a href="index.html#tjenester">Tjenester</a>
+                    <a href="index.html#kontakt">Kontakt</a>
+                    <a href="informasjon.html">Informasjon</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <p>
+                        Brobekkveien 42<br>
+                        0598 Oslo<br><br>
+                        Tlf: <a href="tel:22123456">22 12 34 56</a><br>
+                        <a href="mailto:post@brobekklegekontor.no">post@brobekklegekontor.no</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Brobekk Legekontor. Alle rettigheter reservert.</span>
+                <a href="https://www.helsenorge.no" target="_blank" rel="noopener noreferrer" class="footer-helsenorge">
+                    Helsenorge.no &rarr;
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======== SCRIPTS ======== -->
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+        navLinks.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    </script>
+</body>
+</html>
