@@ -523,6 +523,19 @@
             border-radius: 4px;
         }
 
+        /* Screen reader only */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         /* ========================================
            REDUCED MOTION
            ======================================== */
@@ -536,6 +549,10 @@
         /* ========================================
            RESPONSIVE
            ======================================== */
+        @media (max-width: 1024px) {
+            .kontakt-grid { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 position: absolute;
@@ -567,7 +584,6 @@
             .page-header { padding: 120px 0 60px; }
             .page-header h1 { font-size: 2.2rem; }
             .kontakt-section { padding: 48px 0; }
-            .kontakt-grid { grid-template-columns: 1fr; }
             .kontakt-card--info { padding: 32px 24px; }
             .kontakt-card--directions { padding: 28px 24px; }
             .form-section { padding: 48px 0; }
@@ -703,6 +719,7 @@
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"
                                 title="Kart over Linderud Senter"
+                                tabindex="-1"
                                 allowfullscreen
                             ></iframe>
                         </div>
@@ -884,10 +901,21 @@
             btn.textContent = 'Sendt!';
             btn.style.background = 'var(--forest)';
             btn.disabled = true;
+            // Announce to screen readers
+            let status = e.target.querySelector('[role="status"]');
+            if (!status) {
+                status = document.createElement('span');
+                status.setAttribute('role', 'status');
+                status.setAttribute('aria-live', 'polite');
+                status.className = 'sr-only';
+                e.target.appendChild(status);
+            }
+            status.textContent = 'Meldingen ble sendt!';
             setTimeout(() => {
                 btn.textContent = original;
                 btn.style.background = '';
                 btn.disabled = false;
+                status.textContent = '';
                 e.target.reset();
             }, 3000);
         });
