@@ -966,209 +966,6 @@
         }
 
         /* ========================================
-           CONTACT
-           ======================================== */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 5fr 7fr;
-            gap: 48px;
-            align-items: start;
-        }
-
-        .contact-info-card {
-            background: var(--navy);
-            border-radius: var(--radius);
-            padding: 44px 36px;
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-info-card::before {
-            content: '';
-            position: absolute;
-            top: -60px;
-            right: -60px;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: rgba(198, 125, 74, 0.08);
-            pointer-events: none;
-        }
-
-        .contact-info-card h3 {
-            font-family: var(--font-heading);
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 28px;
-        }
-
-        .contact-detail {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .contact-detail-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--copper-light);
-        }
-
-        .contact-detail-icon svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .contact-detail-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .contact-detail-label {
-            font-size: 0.78rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 4px;
-        }
-
-        .contact-detail-value {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.5;
-        }
-
-        .contact-detail-value a {
-            color: rgba(255, 255, 255, 0.9);
-            transition: color var(--transition);
-        }
-
-        .contact-detail-value a:hover {
-            color: var(--copper-light);
-        }
-
-        .contact-hours {
-            margin-top: 32px;
-            padding-top: 28px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .contact-hours h4 {
-            font-family: var(--font-heading);
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .hours-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            font-size: 0.9rem;
-        }
-
-        .hours-row .day {
-            color: rgba(255, 255, 255, 0.65);
-        }
-
-        .hours-row .time {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-        }
-
-        .hours-row .closed {
-            color: var(--copper-light);
-        }
-
-        /* Contact Form */
-        .contact-form-wrapper {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 44px 40px;
-            border: 1px solid var(--border);
-        }
-
-        .contact-form-wrapper h3 {
-            font-family: var(--font-heading);
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--navy);
-            margin-bottom: 28px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group--full {
-            grid-column: 1 / -1;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.82rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-            letter-spacing: 0.02em;
-        }
-
-        .form-input,
-        .form-textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-family: var(--font-body);
-            font-size: 0.92rem;
-            color: var(--text);
-            background: var(--cream);
-            transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
-            outline: none;
-        }
-
-        .form-input:focus,
-        .form-textarea:focus {
-            border-color: var(--copper);
-            box-shadow: 0 0 0 3px rgba(198, 125, 74, 0.1);
-            background: var(--white);
-        }
-
-        .form-input::placeholder,
-        .form-textarea::placeholder {
-            color: var(--text-light);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 130px;
-        }
-
-        .form-submit {
-            margin-top: 8px;
-        }
-
-        .form-note {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 16px;
-        }
-
-        /* ========================================
            FOOTER
            ======================================== */
         .footer {
@@ -1337,9 +1134,6 @@
             .service-card--wide {
                 grid-column: span 2;
             }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 768px) {
@@ -1458,18 +1252,6 @@
                 padding: 80px 0;
             }
 
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form-wrapper {
-                padding: 32px 24px;
-            }
-
-            .contact-info-card {
-                padding: 32px 24px;
-            }
-
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 36px;
@@ -1510,14 +1292,14 @@
                     <a href="#hjem" class="nav-link active">Hjem</a>
                     <a href="#helsenorge" class="nav-link">Helsenorge</a>
                     <a href="#tjenester" class="nav-link">Tjenester</a>
-                    <a href="#kontakt" class="nav-link">Kontakt</a>
+                    <a href="kontakt.html" class="nav-link">Kontakt</a>
                     <a href="informasjon.html" class="nav-link">Informasjon</a>
                 </div>
 
                 <div class="nav-right">
-                    <a href="tel:22123456" class="nav-phone" aria-label="Ring oss: 22 12 34 56">
+                    <a href="tel:22640844" class="nav-phone" aria-label="Ring oss: 22 64 08 44">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-                        <span>22 12 34 56</span>
+                        <span>22 64 08 44</span>
                     </a>
                     <button class="nav-toggle" id="navToggle" aria-label="Meny" aria-expanded="false">
                         <span></span>
@@ -1544,7 +1326,7 @@
             <p class="hero-desc">Helsetjenester av høyeste kvalitet i trygge og moderne omgivelser. Hos oss er du mer enn en pasient.</p>
             <div class="hero-actions">
                 <a href="https://tjenester.helsenorge.no/timeavtaler" target="_blank" rel="noopener" class="btn btn-primary">Bestill time</a>
-                <a href="#kontakt" class="btn btn-outline">Kontakt oss</a>
+                <a href="kontakt.html" class="btn btn-outline">Kontakt oss</a>
             </div>
         </div>
 
@@ -1728,112 +1510,6 @@
             </div>
         </section>
 
-        <!-- ======== CONTACT ======== -->
-        <section id="kontakt" class="section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-label">Ta kontakt</span>
-                    <h2>Kontakt oss</h2>
-                    <p>Vi er her for å hjelpe deg. Ta gjerne kontakt med oss.</p>
-                </div>
-
-                <div class="contact-grid">
-                    <!-- Contact Info -->
-                    <div class="contact-info-card reveal">
-                        <h3>Kontaktinformasjon</h3>
-
-                        <div class="contact-detail">
-                            <div class="contact-detail-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-                                    <circle cx="12" cy="10" r="3"/>
-                                </svg>
-                            </div>
-                            <div class="contact-detail-text">
-                                <span class="contact-detail-label">Adresse</span>
-                                <span class="contact-detail-value">Brobekkveien 42<br>0598 Oslo</span>
-                            </div>
-                        </div>
-
-                        <div class="contact-detail">
-                            <div class="contact-detail-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
-                                </svg>
-                            </div>
-                            <div class="contact-detail-text">
-                                <span class="contact-detail-label">Telefon</span>
-                                <span class="contact-detail-value"><a href="tel:22123456">22 12 34 56</a></span>
-                            </div>
-                        </div>
-
-                        <div class="contact-detail">
-                            <div class="contact-detail-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
-                                    <path d="M22 4l-10 8L2 4"/>
-                                </svg>
-                            </div>
-                            <div class="contact-detail-text">
-                                <span class="contact-detail-label">E-post</span>
-                                <span class="contact-detail-value"><a href="mailto:post@brobekklegekontor.no">post@brobekklegekontor.no</a></span>
-                            </div>
-                        </div>
-
-                        <div class="contact-hours">
-                            <h4>Åpningstider</h4>
-                            <div class="hours-row">
-                                <span class="day">Mandag – Torsdag</span>
-                                <span class="time">08:00 – 15:30</span>
-                            </div>
-                            <div class="hours-row">
-                                <span class="day">Fredag</span>
-                                <span class="time">08:00 – 15:00</span>
-                            </div>
-                            <div class="hours-row">
-                                <span class="day">Telefontid</span>
-                                <span class="time">08:00 – 11:30</span>
-                            </div>
-                            <div class="hours-row">
-                                <span class="day">Lørdag – Søndag</span>
-                                <span class="time closed">Stengt</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contact Form -->
-                    <div class="contact-form-wrapper reveal reveal-delay-2">
-                        <h3>Send oss en melding</h3>
-                        <form class="contact-form" id="contactForm">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label" for="name">Fullt navn</label>
-                                    <input class="form-input" type="text" id="name" name="name" placeholder="Ola Nordmann" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="phone">Telefon</label>
-                                    <input class="form-input" type="tel" id="phone" name="phone" placeholder="400 00 000">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="email">E-postadresse</label>
-                                <input class="form-input" type="email" id="email" name="email" placeholder="ola@eksempel.no" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="subject">Emne</label>
-                                <input class="form-input" type="text" id="subject" name="subject" placeholder="Hva gjelder henvendelsen?">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="message">Melding</label>
-                                <textarea class="form-textarea" id="message" name="message" placeholder="Skriv din melding her..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-dark form-submit">Send melding</button>
-                            <p class="form-note">For akutte henvendelser, ring oss direkte på telefon. Ikke send sensitive helseopplysninger via dette skjemaet.</p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- ======== FOOTER ======== -->
@@ -1852,15 +1528,16 @@
                     <a href="#hjem">Hjem</a>
                     <a href="#helsenorge">Helsenorge</a>
                     <a href="#tjenester">Tjenester</a>
-                    <a href="#kontakt">Kontakt</a>
+                    <a href="kontakt.html">Kontakt</a>
                     <a href="informasjon.html">Informasjon</a>
                 </div>
                 <div class="footer-col">
                     <h4>Kontakt</h4>
                     <p>
-                        Brobekkveien 42<br>
-                        0598 Oslo<br><br>
-                        Tlf: <a href="tel:22123456">22 12 34 56</a><br>
+                        Linderud Senter, 3. etasje<br>
+                        Erich Mogensons vei 38<br>
+                        0594 Oslo<br><br>
+                        Tlf: <a href="tel:22640844">22 64 08 44</a><br>
                         <a href="mailto:post@brobekklegekontor.no">post@brobekklegekontor.no</a>
                     </p>
                 </div>
@@ -1950,21 +1627,6 @@
 
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // ---- Contact form handler ----
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            const original = btn.textContent;
-            btn.textContent = 'Sendt!';
-            btn.style.background = 'var(--forest)';
-            btn.disabled = true;
-            setTimeout(() => {
-                btn.textContent = original;
-                btn.style.background = '';
-                btn.disabled = false;
-                e.target.reset();
-            }, 3000);
-        });
     </script>
 </body>
 </html>
