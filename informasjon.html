@@ -315,6 +315,28 @@
             color: var(--text-secondary);
             line-height: 1.7;
         }
+        .consult-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .consult-card li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .consult-card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--copper);
+        }
 
         /* ========================================
            BLOOD TEST CARD
@@ -568,7 +590,12 @@
                             </svg>
                         </div>
                         <h3>Fysisk oppmøte</h3>
-                        <p>Tradisjonell konsultasjon ved legekontoret. Egner seg for undersøkelser, prøvetaking og prosedyrer som krever fysisk tilstedeværelse.</p>
+                        <ul>
+                            <li>Varighet ca. 15–20 minutter</li>
+                            <li>Dekker 1–2 problemstillinger per time</li>
+                            <li>Dobbelttime kan bestilles for utvidet tid</li>
+                            <li>Småkirurgi krever dobbel time</li>
+                        </ul>
                     </div>
                     <div class="consult-card">
                         <div class="consult-card-icon consult-card-icon--forest">
@@ -578,7 +605,11 @@
                             </svg>
                         </div>
                         <h3>E-konsultasjon</h3>
-                        <p>Skriftlig konsultasjon via Helsenorge. Send melding til legen og få svar innen kort tid. Praktisk for oppfølging og enklere henvendelser.</p>
+                        <ul>
+                            <li>Skriftlig henvendelse via Helsenorge</li>
+                            <li>Video- eller telefonbasert oppfølging</li>
+                            <li>Betalingsoppfordring sendes via SMS etter samtale</li>
+                        </ul>
                     </div>
                     <div class="consult-card">
                         <div class="consult-card-icon consult-card-icon--copper">
@@ -587,7 +618,12 @@
                             </svg>
                         </div>
                         <h3>Video- og telefon&shy;konsultasjon</h3>
-                        <p>Snakk med legen via video eller telefon. Egner seg godt for oppfølgingssamtaler, reseptfornyelser og rådgivning.</p>
+                        <ul>
+                            <li>Begrenset til maks 8 minutter</li>
+                            <li>Kveldstakst påløper etter kl. 16:00</li>
+                            <li>Sikre og konfidensielle samtaler</li>
+                            <li>Betaling via SMS fra ConvenePay</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -623,7 +659,7 @@
                     <a href="https://www.nav.no/" target="_blank" rel="noopener noreferrer" class="link-card">
                         <div class="link-card-text">
                             <span class="link-card-title">NAV</span>
-                            <span class="link-card-subtitle">nav.no</span>
+                            <span class="link-card-subtitle">Arbeids- og velferdsetaten. Tlf: 55 55 33 33</span>
                         </div>
                         <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
