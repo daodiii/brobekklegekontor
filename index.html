@@ -350,37 +350,6 @@
             max-width: 760px;
         }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 24px;
-            border-radius: 100px;
-            background: rgba(198, 125, 74, 0.08);
-            border: 1px solid rgba(198, 125, 74, 0.15);
-            color: var(--copper-light);
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-        }
-
-        .hero-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--copper);
-            flex-shrink: 0;
-            animation: badge-pulse 2.5s ease-in-out infinite;
-        }
-
-        @keyframes badge-pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
         .hero h1 {
             font-family: var(--font-heading);
             font-size: clamp(3.2rem, 8vw, 6.5rem);
@@ -432,62 +401,6 @@
             gap: 16px;
             justify-content: center;
             flex-wrap: wrap;
-        }
-
-        /* Hero trust stats */
-        .hero-stats {
-            position: relative;
-            z-index: 2;
-            padding: 0 24px 40px;
-            display: flex;
-            justify-content: center;
-            gap: 0;
-        }
-
-        .hero-stats-inner {
-            display: flex;
-            gap: 0;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 28px 12px;
-            max-width: 680px;
-            width: 100%;
-        }
-
-        .hero-stat {
-            flex: 1;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-stat + .hero-stat::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 20%;
-            height: 60%;
-            width: 1px;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .hero-stat-number {
-            display: block;
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--copper-light);
-            line-height: 1.1;
-            margin-bottom: 4px;
-        }
-
-        .hero-stat-label {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.4);
-            font-weight: 400;
-            letter-spacing: 0.03em;
         }
 
         .hero-wave {
@@ -1195,26 +1108,6 @@
                 justify-content: center;
             }
 
-            .hero-stats-inner {
-                flex-wrap: wrap;
-                gap: 0;
-                padding: 20px 8px;
-            }
-
-            .hero-stat {
-                width: 50%;
-                flex: none;
-                padding: 8px 0;
-            }
-
-            .hero-stat + .hero-stat::before {
-                display: none;
-            }
-
-            .hero-stat-number {
-                font-size: 1.6rem;
-            }
-
             .hero-deco-ring,
             .hero-deco-cross,
             .hero-deco-line {
@@ -1319,7 +1212,6 @@
         <div class="hero-deco-line" aria-hidden="true"></div>
 
         <div class="hero-content">
-            <div class="hero-badge">Fastlege i Oslo</div>
             <h1>Brobekk<br><em>Legekontor</em></h1>
             <div class="hero-divider"></div>
             <p class="hero-tagline"><span>Omsorg</span> &middot; <span>Kompetanse</span> &middot; <span>Trygghet</span></p>
@@ -1330,26 +1222,6 @@
             </div>
         </div>
 
-        <div class="hero-stats">
-            <div class="hero-stats-inner">
-                <div class="hero-stat">
-                    <span class="hero-stat-number">30+</span>
-                    <span class="hero-stat-label">Års erfaring</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">2 500+</span>
-                    <span class="hero-stat-label">Listepasienter</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">4.9</span>
-                    <span class="hero-stat-label">Av 5 stjerner</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">24t</span>
-                    <span class="hero-stat-label">Digital tilgang</span>
-                </div>
-            </div>
-        </div>
 
         <svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none">
             <path d="M0,60 C280,100 560,20 840,55 C1020,75 1280,35 1440,60 L1440,100 L0,100 Z" fill="var(--cream)"/>
