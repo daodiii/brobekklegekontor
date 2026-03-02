@@ -1280,7 +1280,7 @@
     <a href="#main" class="skip-link">Hopp til innhold</a>
 
     <!-- ======== NAVIGATION ======== -->
-    <nav class="nav nav--top" id="nav" aria-label="Hovednavigasjon">
+    <nav class="nav nav--scrolled" id="nav" aria-label="Hovednavigasjon">
         <div class="container">
             <div class="nav-inner">
                 <a href="#hjem" class="nav-logo">
@@ -1557,13 +1557,7 @@
         const nav = document.getElementById('nav');
         const heroSection = document.querySelector('.hero');
 
-        function updateNav() {
-            const scrolled = window.scrollY > 60;
-            nav.classList.toggle('nav--top', !scrolled);
-            nav.classList.toggle('nav--scrolled', scrolled);
-        }
-        updateNav();
-        window.addEventListener('scroll', updateNav, { passive: true });
+        // Navbar always stays solid (nav--scrolled)
 
         // ---- Mobile menu toggle ----
         const navToggle = document.getElementById('navToggle');
@@ -1573,13 +1567,6 @@
             const isOpen = navToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
             navToggle.setAttribute('aria-expanded', isOpen);
-            // Force scrolled style when menu is open
-            if (isOpen) {
-                nav.classList.remove('nav--top');
-                nav.classList.add('nav--scrolled');
-            } else {
-                updateNav();
-            }
         });
 
         // Close mobile menu on link click
@@ -1588,7 +1575,6 @@
                 navToggle.classList.remove('active');
                 navLinks.classList.remove('active');
                 navToggle.setAttribute('aria-expanded', 'false');
-                updateNav();
             });
         });
 
