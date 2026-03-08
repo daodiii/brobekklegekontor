@@ -403,6 +403,74 @@
             flex-wrap: wrap;
         }
 
+        .hero-info-bar {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 48px;
+            flex-wrap: wrap;
+        }
+
+        .hero-info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 24px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(198, 125, 74, 0.12);
+            border-radius: 14px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition);
+        }
+
+        .hero-info-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(198, 125, 74, 0.25);
+        }
+
+        .hero-info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(198, 125, 74, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .hero-info-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--copper-light);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .hero-info-text {
+            text-align: left;
+        }
+
+        .hero-info-label {
+            font-family: var(--font-heading);
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--copper-light);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .hero-info-value {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
         .hero-wave {
             position: absolute;
             bottom: -1px;
@@ -1102,6 +1170,25 @@
                 align-items: center;
             }
 
+            .hero-info-bar {
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 32px;
+                align-items: center;
+            }
+
+            .hero-info-item {
+                width: 100%;
+                max-width: 300px;
+                padding: 12px 18px;
+                gap: 12px;
+            }
+
+            .hero-info-icon {
+                width: 36px;
+                height: 36px;
+            }
+
             .btn {
                 width: 100%;
                 max-width: 280px;
@@ -1274,6 +1361,27 @@
             <div class="hero-actions">
                 <a href="https://tjenester.helsenorge.no/timeavtaler" target="_blank" rel="noopener" class="btn btn-primary">Bestill time</a>
                 <a href="kontakt.html" class="btn btn-outline">Kontakt oss</a>
+            </div>
+
+            <div class="hero-info-bar">
+                <div class="hero-info-item">
+                    <div class="hero-info-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="hero-info-text">
+                        <div class="hero-info-label">Åpningstider</div>
+                        <div class="hero-info-value">Man – Fre: 08:00 – 15:00</div>
+                    </div>
+                </div>
+                <div class="hero-info-item">
+                    <div class="hero-info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div class="hero-info-text">
+                        <div class="hero-info-label">Telefontid</div>
+                        <div class="hero-info-value">09:00 – 11:30 &amp; 13:00 – 14:00</div>
+                    </div>
+                </div>
             </div>
         </div>
 
